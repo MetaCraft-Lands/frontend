@@ -137,7 +137,7 @@ const DisplayNft = ({contract}: Props) => {
 
     return (
         <>
-            <h1> Unstaked BlockHeads </h1>      
+            <h1> Unstaked Lands </h1>      
             <Collection>
                 {(unstakeds.length > 0) ?
                     unstakeds.map((nft) => {
@@ -157,7 +157,6 @@ const DisplayNft = ({contract}: Props) => {
                                     </NftTraits>
                                     : <></>}
                             </Frame>
-
                             <NFTName>{nft.metadata.title}</NFTName>
                             <SelectSkin href={"https://www.minecraft.net/profile/skin/remote?url=" + getSkinImage(nft)}
                                         target="_blank" rel="noopener noreferrer"> Change skin </SelectSkin>
@@ -167,10 +166,10 @@ const DisplayNft = ({contract}: Props) => {
                                 </>
                                 : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
                         </NFT>)
-                    }) : <p>You do not own any unstaked BlockHeads</p>
+                    }) : <p>You do not own any unstaked Lands</p>
                 }
             </Collection>
-            <h1> Staked BlockHeads </h1>     
+            <h1> Staked Lands </h1>     
             <Collection>
                 {(stakeds.length > 0) ?
                     stakeds.map((nft) => {
@@ -200,7 +199,7 @@ const DisplayNft = ({contract}: Props) => {
                                 </>
                                 : <Stake onClick={() => stake(nft.token_id.toString())}>Stake</Stake>}
                         </NFT>)
-                    }) : <p>You do not own any staked BlockHeads</p>
+                    }) : <p>You do not own any staked Lands</p>
                 }
             </Collection>
 

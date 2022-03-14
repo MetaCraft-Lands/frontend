@@ -35,7 +35,7 @@ const Dashboard = ({contract, response}: Props) => {
                         When Minecraft meets Blockchain
                     </SectionTitle>
                     <SectionDescription>
-                        Mint & Stake you BlockHead now to enjoy the MetaCraft Metaverse!
+                        Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
                     </SectionDescription>
                     <b>{printNftMintMsg(response)}</b>
                     <Mint contract={contract} response={response}/>
@@ -44,9 +44,9 @@ const Dashboard = ({contract, response}: Props) => {
 
             <Section>
                 <Container>
-                    <SectionTitle>Your BlockHeads</SectionTitle>
+                    <SectionTitle>Your Lands</SectionTitle>
                     <SectionDescription>
-                        Stake your BlockHeads and Join MetaCraft server at 18.219.218.172 to earn $BUILDs! 
+                        Stake your Lands and Join MetaCraft server at 18.219.218.172 to earn $BUILDs! 
                         
                         Once $BUILD is claimed, you'll be able to use these utility
                         tokens for upcoming features, and other future projects.
