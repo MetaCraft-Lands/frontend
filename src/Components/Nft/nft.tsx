@@ -15,9 +15,6 @@ import {fetchVerifiedUserByNearAccountId} from "../VerifyAccount";
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
 
-interface Props {
-    contract: Contract,
-}
 
 const getSkinImage = (nft: any) => {
     return nft.metadata.media.replace("preview-skin", "skin");
@@ -41,7 +38,7 @@ const getAllStakedNfts = async (nearAccountId: string) => {
     return await query.findAll();
 }
 
-const DisplayNft = ({contract}: Props) => {
+const DisplayNft = () => {
     const [nfts, setNfts] = React.useState<any[]>([]);
     const [overlay, setOverlay] = useState(false)
     const [displayInfo, setDisplayInfo] = useState(new Map());

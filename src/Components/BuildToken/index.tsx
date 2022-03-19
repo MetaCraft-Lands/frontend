@@ -3,7 +3,7 @@ import {nearWallet, getLastTransactionStatus} from "../../libs/wallet";
 import { Button } from "../../styles/styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
-import {tokenContract, isTokenApproved, approveToken} from "../../libs/contract";
+import {tokenContract} from "../../libs/contract";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
@@ -43,11 +43,6 @@ const getBuildGenerated = async () => {
 
 const mint = async (amount: number) => {
   await resetPlayTime(nearWallet.getAccountId());
-  //@ts-ignore
-  await tokenContract.mint(
-    {
-        "amount": Math.floor(amount * 1e5).toString()
-    });
 }
 
 const getTokenBalance = async () => {
@@ -68,10 +63,8 @@ const BuildToken = () => {
   });
 
   const [tokenApproved, setTokenApproved] = useState(false);
-    if (numBuild > 0) {
-    isTokenApproved().then((approved: boolean) => {
-      setTokenApproved(approved);
-    })
+  if (numBuild > 0) {
+    // TODO
   }
 
   const [responseMsg, setResponseMsg] = useState("");  
@@ -99,10 +92,7 @@ const BuildToken = () => {
   }
 
   const setApproveToken = () => {
-    approveToken().then(() => {
-      console.log("create storage deposit to interate with BUILD contract");
-      setTokenApproved(true);
-    });
+    //TODO
   }
 
 

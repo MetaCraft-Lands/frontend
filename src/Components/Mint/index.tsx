@@ -4,21 +4,12 @@ import {randomMeta} from "../../config/metadata"
 import { Button } from "./styles";
 import { ethers } from 'ethers';
 
-import contract from '../../contracts/MetaCraft.json';
-
-const contractAddr = "0x1ec18749bB7Aa09Ef216A1CF4043592B58a708a1";
-const abi = contract.abi;
-declare var window: any;
-const { ethereum } = window;
+import { nftContract } from "../../libs/contract";
 
 const MintNft = () => {
 
     const mintNftHandler = async () => { 
-        try {
-          const provider = new ethers.providers.Web3Provider(ethereum);
-          const signer = provider.getSigner();
-          const nftContract = new ethers.Contract(contractAddr, abi, signer);
-    
+        try {    
           console.log("Mining... please wait");
           let nftTxn = await nftContract.mintWorld(randomMeta());
     

@@ -13,10 +13,6 @@ import {
 import Container from "../Container";
 
 
-interface Props {
-    contract: Contract,
-    response: any
-}
 
 const printNftMintMsg = (response: any) => {
     if (response && response.status != null && response.method === 'nft_mint') {
@@ -26,7 +22,7 @@ const printNftMintMsg = (response: any) => {
     return "";
 }
 
-const Dashboard = ({contract, response}: Props) => {
+const Dashboard = () => {
     return (
         <>
             <Bg>
@@ -37,7 +33,7 @@ const Dashboard = ({contract, response}: Props) => {
                     <SectionDescription>
                         Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
                     </SectionDescription>
-                    <b>{printNftMintMsg(response)}</b>
+                    <b>TODO</b>
                     <Mint/>
                 </Container>
             </Bg>
@@ -51,7 +47,7 @@ const Dashboard = ({contract, response}: Props) => {
                         Once $BUILD is claimed, you'll be able to use these utility
                         tokens for upcoming features, and other future projects.
                     </SectionDescription>
-                    <DisplayNft contract={contract}/>
+                    <DisplayNft/>
 
                     <Hr/>
                     <SectionTitle>Your Unclaimed $BUILD</SectionTitle>

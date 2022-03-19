@@ -11,11 +11,8 @@ import Demo from "../Demo";
 import Play from "../Play";
 import GetStarted from "../GetStarted";
 
-interface Props {
-    contract: Contract,
-}
 
-const Home = ({contract}: Props) => {
+const Home = () => {
     return (
         <>
                 <Para bgImage={"/img/minecraft-banner.jpeg"}

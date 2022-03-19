@@ -13,20 +13,16 @@ import {VerifyAccount} from './Components/VerifyAccount';
 import Whitepaper from './Components/Whitepaper';
 import Play from "./Components/Play";
 
-interface Props {
-    contract: Contract,
-    response: any
-}
 
-const Router = ({contract, response}: Props) => {
+const Router = () => {
     return (
         <Suspense fallback={null}>
             <Styles/>
             <Header/>
 
             <Routes>
-                <Route path="/" element={<Home contract={contract}/>}/>
-                <Route path="/nft" element={<Dashboard contract={contract} response={response}/>}/>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/nft" element={<Dashboard/>}/>
                 <Route path="/verify" element={<VerifyAccount/>}/>
                 <Route path="/map"/>
                 <Route path="/whitepaper" element={<Whitepaper/>}/>
