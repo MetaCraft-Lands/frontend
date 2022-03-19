@@ -15,7 +15,7 @@ declare var window: any;
 
 const getWalletAddr = async () => {
   if (!ethereum) {
-    return null;
+    return "";
   }
 
   // Get current connected addresses.
@@ -25,7 +25,7 @@ const getWalletAddr = async () => {
     console.log("chain id is " + chainId);
     if (chainId != RINKEBY_CHAIN_ID_HEX) {
       console.log("Wrong network");
-      return null;
+      return "";
     }
     console.log("Found an account! Address: ", accounts[0]);
     return accounts[0];
