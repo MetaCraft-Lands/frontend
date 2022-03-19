@@ -1,5 +1,4 @@
 import {nearWallet} from "../../libs/wallet";
-import {Contract} from "near-api-js";
 import React, {useEffect, useState} from "react";
 import {
     Collection, Image,
