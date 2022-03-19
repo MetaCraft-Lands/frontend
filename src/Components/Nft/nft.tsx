@@ -9,6 +9,7 @@ import {
 } from "./styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
+import UploadMetadataButton from "../UploadMetadataButton/UploadMetadataButton";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
@@ -42,6 +43,7 @@ const DisplayNft = () => {
             <h1> Staked Lands </h1>     
             <Collection>
             </Collection>
+            <UploadMetadataButton/>
         </>
     );
 };
