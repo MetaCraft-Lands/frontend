@@ -2,9 +2,8 @@
 import {randomMeta} from "../../config/metadata"
 
 import { Button } from "./styles";
-import { ethers } from 'ethers';
 
-import { nftContract } from "../../libs/contract";
+import { nftContract } from "../../libs/contracts";
 
 const MintNft = () => {
 

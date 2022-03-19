@@ -1,43 +1,72 @@
-import getConfig from "../config/config";
-import * as nearAPI from "near-api-js"
+declare var window: any;
+const {ethereum} = window;
 
+// const RINKEBY_CHAIN_ID = 4;
+const RINKEBY_CHAIN_ID_HEX = "0x4";
+const RINKEBY_RPC_URL = "https://rinkeby.infura.io/v3/";
 
-const nearConfig = getConfig(process.env.REACT_APP_NEAR_CONFIG_ENV || "development")
-const nearConnection = await nearAPI.connect(Object.assign({deps: {keyStore: new nearAPI.keyStores.BrowserLocalStorageKeyStore()}},
-    nearConfig));
-
-const nearWallet = new nearAPI.WalletAccount(nearConnection, null);
-
-const signIn = async () => {
-    await nearWallet.requestSignIn(nearConfig.contractName, "test app");
-    return nearWallet.getAccountId();
-};
-
-const signOut = () => {
-    nearWallet.signOut();
-};
-
-
-const getLastTransactionStatus = async ()=> {
-    let queryString = window.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    let txHash = urlParams.get('transactionHashes');
-    let method = "";
-    if (txHash) {
-        let txHashDecoded = nearAPI.utils.serialize.base_decode(txHash == null ? "" : txHash);
-        let response = await nearConnection.connection.provider.txStatus(txHashDecoded, nearWallet.getAccountId());
-        method = response.transaction.actions[0].FunctionCall.method_name;
-        if(response.status.hasOwnProperty("SuccessValue")) return {"status": true, "msg": "Transaction succeeded", "method": method};
+const getWalletAddr = async () => {
+    if (!ethereum) {
+      return "";
     }
-
-    let errorMsg = urlParams.get('errorMessage');
-    if (errorMsg) return {"status": false, "msg": decodeURI(errorMsg)};
-    return {"status": null, "msg":"", "method": method};
+  
+    // Get current connected addresses.
+    const accounts = await ethereum.request({method: 'eth_accounts'});
+    if (accounts.length > 0) {
+      const chainId = await ethereum.request({ method: 'eth_chainId' });
+      console.log("chain id is " + chainId);
+      if (chainId != RINKEBY_CHAIN_ID_HEX) {
+        console.log("Wrong network");
+        return "";
+      }
+      console.log("Found an account! Address: ", accounts[0]);
+      return accounts[0];
+    } else {
+      console.log("No authorized account found");
+      return "";
+    }
+  }
+  
+const switchChain = async (chainIdHex, chainUrl) => {
+    try {
+        await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: chainIdHex }],
+        });
+    } catch (switchError: any) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+        try {
+            await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+                {
+                chainId: chainIdHex,
+                chainName: "ETH",
+                rpcUrls: [chainUrl] /* ... */,
+                },
+            ],
+            });
+            await ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: chainIdHex }],
+            });
+        } catch (addError) {
+            // handle "add" error
+            console.log("Failed to add network " + addError);
+            return false;
+        }
+        }
+        // handle other "switch" errors
+        console.error("Error in switch network");
+        return false;
+    }
 }
 
+const walletAddr = getWalletAddr();
+
+
 export {
-    signIn,
-    signOut,
-    nearWallet,
-    getLastTransactionStatus
+    getWalletAddr,
+    switchChain
 }
