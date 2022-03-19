@@ -120,7 +120,7 @@ const Login = () => {
     )
   }
 
-  return <>{currentAccount === null ? signInButton() : connectedButton()}</>;
+  return <>{currentAccount == "" ? signInButton() : connectedButton()}</>;
 };
 
 export default Login;
