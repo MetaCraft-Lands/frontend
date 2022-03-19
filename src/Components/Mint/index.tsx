@@ -1,48 +1,44 @@
-import { nearWallet} from "../../libs/wallet";
+
 import {randomSkin} from "../../config/skins"
-import {Contract} from "near-api-js";
+
 import { Button } from "./styles";
-const BN = require('bn.js');
+import { ethers } from 'ethers';
 
-interface Props {
-    contract: Contract,
-    response: any
-}
+import contract from '../../contracts/MetaCraft.json';
 
-const removeParamsFromUrl= ()=> {
-    var url= document.location.href;
-    window.history.pushState({}, "", url.split("?")[0]);
-}
+const contractAddr = "0xa232d51eCc25B2d28686db34fB2045E3E54BCA74";
+const abi = contract.abi;
+declare var window: any;
+const { ethereum } = window;
 
-const Mint = ({contract, response}: Props) => {
+const Mint = () => {
 
-    const wallet = nearWallet;
-
-    const mint = async () => {
-        var id = Math.floor(Math.random() * 10000);
-
-        removeParamsFromUrl();
-
-        //@ts-ignore
-        await contract.nft_mint(
-            {
-                "token_id": id.toString(),
-                "token_owner_id": wallet.getAccountId(),
-                "token_metadata": {
-                    "title": "BlockHead #" + id,
-                    "description": "MetaCraft character",
-                    "media": randomSkin(),
-                    "copies": 1
-                }
-            },
-            new BN('26B4BD9110D0', 16),
-            new BN('26B4BD9110DCE800000', 16)
-        );
-    }
+    const mintNftHandler = async () => { 
+        try {
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const nftContract = new ethers.Contract(contractAddr, abi, signer);
+    
+          console.log("Mining... please wait");
+          const metadata = {
+              "_tokenId": 1,
+              "_seed": 79311,
+              "_tokenMetadataIPFSHash": "QmahudrKVthW5sccUN22bVbfxekjmttATPXeeoVdtJmth8"
+          }
+          let nftTxn = await nftContract.mintWorld(metadata);
+    
+          await nftTxn.wait();
+    
+          alert(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
+        } catch (err) {
+          console.log(err);
+        }
+    
+      }
 
     return (
         <>
-            <Button onClick={mint}> Mint Now </Button>
+            <Button onClick={mintNftHandler}> Mint Now </Button>
         </>
     );
 };

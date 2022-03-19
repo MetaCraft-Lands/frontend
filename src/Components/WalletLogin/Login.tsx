@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { Span } from "../Header/styles";
-import contract from '../../contracts/MetaCraft.json';
-import { ethers } from 'ethers';
 
-const contractAddr = "0xa232d51eCc25B2d28686db34fB2045E3E54BCA74";
-const abi = contract.abi;
+declare var window: any;
 const {ethereum} = window;
 
 // const RINKEBY_CHAIN_ID = 4;
 const RINKEBY_CHAIN_ID_HEX = "0x4";
 const RINKEBY_RPC_URL = "https://rinkeby.infura.io/v3/";
 
-declare var window: any;
 
 const getWalletAddr = async () => {
   if (!ethereum) {

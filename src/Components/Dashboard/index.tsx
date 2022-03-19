@@ -38,7 +38,7 @@ const Dashboard = ({contract, response}: Props) => {
                         Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
                     </SectionDescription>
                     <b>{printNftMintMsg(response)}</b>
-                    <Mint contract={contract} response={response}/>
+                    <Mint/>
                 </Container>
             </Bg>
 
