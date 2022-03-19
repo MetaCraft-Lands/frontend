@@ -76,7 +76,8 @@ const getNftJsx = (land: Land): JSX.Element => {
     <NFT>
       <Frame>
         <Image src={land.image} alt={"nft"} />
-        <h1>Land #{land.id.toString()}</h1>
+        Land #{land.id.toString()}
+        <UploadMetadataButton />
       </Frame>
     </NFT>
   );
@@ -93,7 +94,6 @@ const DisplayNft = () => {
       <Collection>{nfts}</Collection>
       <h1> Staked Lands </h1>
       <Collection></Collection>
-      <UploadMetadataButton />
     </>
   );
 };
