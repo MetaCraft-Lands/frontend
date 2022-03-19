@@ -24,7 +24,7 @@ export const SectionDescription = styled.p`
 
 export const Section = styled.div`
   background-color: #cfc;
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   margin-bottom: 2rem;
   box-shadow: 3px 3px 0 0 #161616;
   width: 100%;

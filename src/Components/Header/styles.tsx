@@ -3,7 +3,7 @@ import {DownOutlined} from "@ant-design/icons";
 import DropdownButton from "antd/lib/dropdown/dropdown-button";
 
 export const HeaderSection = styled("header")`
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   background: #000000;
   width: 100%;  
   .ant-row-space-between {
@@ -43,7 +43,7 @@ export const Span = styled("span")`
 `;
 
 export const NavContainer = styled("div")`
-  width: 100%;
+  //width: 100%;
   display: flex;
 `
 

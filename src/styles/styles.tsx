@@ -19,6 +19,12 @@ export const Styles = createGlobalStyle`
     src: url("fonts/Minecraftia-Regular.ttf") format("truetype");
     font-style: normal;
   }
+
+  @font-face {
+    font-family: "ntailu";
+    src: url("fonts/ntailu.ttf") format("truetype");
+    font-style: normal;
+  }
   
   body,
   html,

@@ -19,17 +19,17 @@ const Header = () => {
                     </NavLink>
                     <NavLink>
                         <Link to="/nft">
-                            <Span>NFT & GAME</Span>
+                            <Span>MY METACRAFT</Span>
                         </Link>
                     </NavLink>
                     <NavLink>
-                        <Link to="/how-to-play">
-                            <Span>HOW TO PLAY</Span>
+                        <Link to="/play">
+                            <Span>PLAY</Span>
                         </Link>
                     </NavLink>
                     <NavLink>
                         <Link to="/whitepaper">
-                            <Span>WHITEPAPER</Span>
+                            <Span>White Paper</Span>
                         </Link>
                     </NavLink>
                 </NavLeft>

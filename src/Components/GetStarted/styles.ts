@@ -4,7 +4,7 @@ export const Section = styled.div`
   background-color: black;
   width: 100%;
   text-align: center;
-  padding: 4rem;
+  padding: 2rem;
 `
 export const SectionTitle = styled.div`
   color: #15843C;

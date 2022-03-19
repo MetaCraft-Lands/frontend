@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const FooterSection = styled("footer")`
   background: black;
-  width: 100%;
-  padding: 1rem 4rem;
+   width: 100%;
+  padding: 1rem 2rem;
   height: 50px;
   margin-bottom: 0;
 `;

@@ -29,7 +29,7 @@ export const Overlay = styled.div`
 `
 
 export const Para = styled(Parallax)`
-  padding: 0 4rem;
+  padding: 0 2rem;
   width: 100%;
   z-index: -2;
 
