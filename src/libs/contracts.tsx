@@ -13,6 +13,7 @@ const getNftContract = () => {
           return new ethers.Contract(contractAddr, abi, signer);
 }
 
+// Globle contract singleton instance shared by many components.
 const nftContract = getNftContract();
 
 const tokenContract = null;
