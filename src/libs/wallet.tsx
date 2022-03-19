@@ -5,7 +5,7 @@ const {ethereum} = window;
 const RINKEBY_CHAIN_ID_HEX = "0x4";
 const RINKEBY_RPC_URL = "https://rinkeby.infura.io/v3/";
 
-const getWalletAddr = async () => {
+const getWalletAddr = async (): Promise<string> => {
     if (!ethereum) {
       return "";
     }
@@ -63,10 +63,11 @@ const switchChain = async (chainIdHex, chainUrl) => {
     }
 }
 
-const walletAddr = getWalletAddr();
+const walletAddr = await getWalletAddr();
 
 
 export {
     getWalletAddr,
-    switchChain
+    switchChain,
+    walletAddr
 }

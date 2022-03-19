@@ -9,44 +9,47 @@ import {
 } from "./styles";
 //@ts-ignore
 import Parse from 'parse/dist/parse.min.js';
+import {nftContract} from '../../libs/contracts';
+import {walletAddr} from '../../libs/wallet';
+import { BigNumber } from "ethers";
 
 Parse.initialize(process.env.REACT_APP_APPLICATION_ID, process.env.REACT_APP_JAVASCRIPT_KEY);
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
 
-const getAllStakedNfts = async (nearAccountId: string) => {
-    //TODO
+const getNftIds = async (account: string):Promise<BigNumber[]> => {
+    console.log("fetching all nfts from chain...");
+    let numNft: number = await nftContract.balanceOf(account);
+
+    let nftCalls: any = []
+    for (let i = 0; i < numNft; i++) {
+        nftCalls.push(nftContract.tokenOfOwnerByIndex(account, i));
+    }
+    let tokenIds: BigNumber[]  = await Promise.all(nftCalls);
+    return tokenIds;
 }
 
+const getNft = (id: BigNumber): JSX.Element => {
+    return (<NFT><Frame>Land #{id.toString()}</Frame></NFT>);
+}
+
+const lands = (await getNftIds(walletAddr)).map(getNft);
+
 const DisplayNft = () => {
-
-    const unstake = async (token_id: string) => {
-        //TODO
-    }
-    
-    const stake = async (token_id: string) => {
-        //TODO
-    }
-
-    const hover = (token_id: string) => {
-        //TODO
-    }
-    const hoverleave = (token_id:string) => {
-        //TODO
-    }
+    const [nfts, setNfts] = useState<JSX.Element[]>(lands);
 
     return (
         <>
             <h1> Unstaked Lands </h1>      
             <Collection>
+            {nfts}
             </Collection>
-            <h1> Staked Lands </h1>     
+            {/* <h1> Staked Lands </h1>     
             <Collection>
-            </Collection>
+            </Collection> */}
         </>
     );
 };
 
 export {
-    DisplayNft,
-    getAllStakedNfts
+    DisplayNft
 }
