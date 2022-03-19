@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 
 import contract from '../contractAbi/MetaCraft.json';
 
-const contractAddr = "0x1ec18749bB7Aa09Ef216A1CF4043592B58a708a1";
+const contractAddr = "0xdE0344a9B4f138406a72c2d9B82F596351ef061a";
 const abi = contract.abi;
 declare var window: any;
 const { ethereum } = window;

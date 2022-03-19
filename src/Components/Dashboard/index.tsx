@@ -13,15 +13,6 @@ import {
 import Container from "../Container";
 
 
-
-const printNftMintMsg = (response: any) => {
-    if (response && response.status != null && response.method === 'nft_mint') {
-        let prefix = response.status ? "Mint succeeded!" : "";
-        return prefix + " " + (response ? response.msg : "");
-    }
-    return "";
-}
-
 const Dashboard = () => {
     return (
         <>
@@ -33,7 +24,7 @@ const Dashboard = () => {
                     <SectionDescription>
                         Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
                     </SectionDescription>
-                    <b>TODO</b>
+                    
                     <Mint/>
                 </Container>
             </Bg>

@@ -10,7 +10,7 @@ const MintNft = () => {
     const mintNftHandler = async () => { 
         try {    
           console.log("Mining... please wait");
-          let nftTxn = await nftContract.mintWorld(randomMeta());
+          let nftTxn = await nftContract.mintLand(randomMeta());
     
           await nftTxn.wait();
     
