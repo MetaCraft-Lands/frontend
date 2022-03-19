@@ -31,6 +31,7 @@ const getWalletAddr = async () => {
     return accounts[0];
   } else {
     console.log("No authorized account found");
+    return "";
   }
 }
 
