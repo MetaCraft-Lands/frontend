@@ -23,6 +23,8 @@ Parse.initialize(
 );
 Parse.serverURL = process.env.REACT_APP_HOST_URL;
 
+const IPFS_GATEWAY = "gateway.pinata.cloud";
+
 type Land = {
   id: BigNumber; // uint256
   name: string;
@@ -46,7 +48,7 @@ const getNfts = async (account: string): Promise<Land[]> => {
   );
   let metas: any = await Promise.all(
     uris.map(async (uri) => {
-      uri = uri.replace("cf-ipfs.com", "gateway.pinata.cloud");
+      uri = uri.replace("cf-ipfs.com", IPFS_GATEWAY);
       console.log("Fetching " + uri);
       const resp = await fetch(uri, {
         headers: {
@@ -62,10 +64,7 @@ const getNfts = async (account: string): Promise<Land[]> => {
     lands.push({
       id: tokenIds[i],
       name: metas[i].name,
-      image: metas[i].image.replace(
-        "ipfs://",
-        "https://gateway.pinata.cloud/ipfs/"
-      ),
+      image: metas[i].image.replace("ipfs://", `https://${IPFS_GATEWAY}/ipfs/`),
     });
   }
 
