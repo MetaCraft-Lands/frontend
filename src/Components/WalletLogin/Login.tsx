@@ -1,37 +1,126 @@
 import { useState } from "react";
 import { Span } from "../Header/styles";
+import contract from '../../contracts/MetaCraft.json';
+import { ethers } from 'ethers';
+
+const contractAddr = "0xa232d51eCc25B2d28686db34fB2045E3E54BCA74";
+const abi = contract.abi;
+const {ethereum} = window;
+
+// const RINKEBY_CHAIN_ID = 4;
+const RINKEBY_CHAIN_ID_HEX = "0x4";
+const RINKEBY_RPC_URL = "https://rinkeby.infura.io/v3/";
 
 declare var window: any;
 
+const getWalletAddr = async () => {
+  if (!ethereum) {
+    return null;
+  }
+
+  // Get current connected addresses.
+  const accounts = await ethereum.request({method: 'eth_accounts'});
+  if (accounts.length > 0) {
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log("chain id is " + chainId);
+    if (chainId != RINKEBY_CHAIN_ID_HEX) {
+      console.log("Wrong network");
+      return null;
+    }
+    console.log("Found an account! Address: ", accounts[0]);
+    return accounts[0];
+  } else {
+    console.log("No authorized account found");
+  }
+}
+
+const switchChain = async (chainIdHex, chainUrl) => {
+  try {
+    await ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: chainIdHex }],
+    });
+  } catch (switchError: any) {
+    // This error code indicates that the chain has not been added to MetaMask.
+    if (switchError.code === 4902) {
+      try {
+        await ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: chainIdHex,
+              chainName: "ETH",
+              rpcUrls: [chainUrl] /* ... */,
+            },
+          ],
+        });
+        await ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: chainIdHex }],
+        });
+      } catch (addError) {
+        // handle "add" error
+        console.log("Failed to add network " + addError);
+        return false;
+      }
+    }
+    // handle other "switch" errors
+    console.error("Error in switch network");
+    return false;
+  }
+}
+
 // Wallet login.
 const Login = () => {
-  const [defaultAccount, setDefaultAccount] = useState(null);
+  const [currentAccount, setCurrentAccount] = useState("");
+  // Set account to already connected user if any.
+  getWalletAddr().then((addr) => {setCurrentAccount(addr)});
 
-  const signInOnClick = () => {
-    console.log("sign in metamask")
-    if (window.ethereum) {
-      window.ethereum
-        .request({ method: "eth_requestAccounts" })
-        .then((result) => {
-          accountChangedHandler(result[0]);
-        });
+  const signInHandler = async () => { 
+    if (!ethereum) {
+      alert("Please install Metamask!"); 
+      return;
     }
-  };
+  
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log("Found an account! Address: ", accounts[0]);
 
-  const accountChangedHandler = (newAccount) => {
-    setDefaultAccount(newAccount);
-  };
+      const chainId = await ethereum.request({ method: 'eth_chainId' });
+      if (chainId != RINKEBY_CHAIN_ID_HEX) {
+        console.log("Network is incorrect, switching network.");
+        await switchChain(RINKEBY_CHAIN_ID_HEX, RINKEBY_RPC_URL);
+      }
 
-  const signOutOnClick = () => {
-    setDefaultAccount(null);
-  };
+      setCurrentAccount(accounts[0]);
 
-  if (defaultAccount) {
-    return (
-      <Span onClick={signOutOnClick}>{defaultAccount} (logout)</Span>
-    );
+    } catch (err) {
+      console.log(err);
+    }
   }
-  return <Span onClick={signInOnClick}> Connect with MetaMask</Span>;
+
+  // Listen to account change.
+  ethereum.on(
+    'accountsChanged', 
+    (accounts: Array<string>) => {setCurrentAccount(accounts[0]);});
+  
+  const signInButton = () => {
+    return (
+      <Span onClick={signInHandler}>
+        Connect with MetaMask
+      </Span>
+    )
+  }
+  
+  const connectedButton = () => {
+    return (
+      <Span>
+        {currentAccount}
+      </Span>
+    )
+  }
+
+  return <>{currentAccount === null ? signInButton() : connectedButton()}</>;
 };
 
 export default Login;
