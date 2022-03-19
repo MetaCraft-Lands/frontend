@@ -1,17 +1,17 @@
 
-import {randomSkin} from "../../config/skins"
+import {randomMeta} from "../../config/metadata"
 
 import { Button } from "./styles";
 import { ethers } from 'ethers';
 
 import contract from '../../contracts/MetaCraft.json';
 
-const contractAddr = "0xa232d51eCc25B2d28686db34fB2045E3E54BCA74";
+const contractAddr = "0x1ec18749bB7Aa09Ef216A1CF4043592B58a708a1";
 const abi = contract.abi;
 declare var window: any;
 const { ethereum } = window;
 
-const Mint = () => {
+const MintNft = () => {
 
     const mintNftHandler = async () => { 
         try {
@@ -20,12 +20,7 @@ const Mint = () => {
           const nftContract = new ethers.Contract(contractAddr, abi, signer);
     
           console.log("Mining... please wait");
-          const metadata = {
-              "_tokenId": 1,
-              "_seed": 79311,
-              "_tokenMetadataIPFSHash": "QmahudrKVthW5sccUN22bVbfxekjmttATPXeeoVdtJmth8"
-          }
-          let nftTxn = await nftContract.mintWorld(metadata);
+          let nftTxn = await nftContract.mintWorld(randomMeta());
     
           await nftTxn.wait();
     
@@ -43,4 +38,4 @@ const Mint = () => {
     );
 };
 
-export default Mint;
+export default MintNft;
