@@ -22,8 +22,6 @@ const getAccumulatedPlayTimeFromDB = async (
   query.equalTo("account", account);
   // run the query
   const results = await query.findAll();
-  // @ts-ignore
-  console.log("results ", results);
   return results.length > 0 ? results[0].get("accumulatedPlayTime") : null;
 };
 
@@ -44,6 +42,7 @@ const resetPlayTimeInDB = async (account: string) => {
 };
 
 const mint = async (amount: number) => {
+  console.log("Mint build token...");
   await tokenContract.mint(amount);
 };
 
