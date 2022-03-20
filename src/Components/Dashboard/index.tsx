@@ -1,56 +1,42 @@
 import Mint from "../Mint";
-import {Contract} from "near-api-js";
-import {DisplayNft} from "../Nft/nft";
+import { Contract } from "near-api-js";
+import { DisplayNft } from "../Nft/nft";
 import BuildToken from "../BuildToken";
 
-import {
-    SectionDescription,
-    SectionTitle,
-    Section,
-    Bg,
-    Hr
-} from "./styles"
+import { SectionDescription, SectionTitle, Section, Bg, Hr } from "./styles";
 import Container from "../Container";
 
-
 const Dashboard = () => {
-    return (
-        <>
-            <Bg>
-                <Container>
-                    <SectionTitle>
-                        When Minecraft meets Blockchain
-                    </SectionTitle>
-                    <SectionDescription>
-                        Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
-                    </SectionDescription>
-                    
-                    <Mint/>
-                </Container>
-            </Bg>
+  return (
+    <>
+      <Bg>
+        <Container>
+          <SectionTitle>When Minecraft meets Blockchain</SectionTitle>
+          <SectionDescription>
+            Mint & Stake you Land now to enjoy the MetaCraft Metaverse!
+          </SectionDescription>
 
-            <Section>
-                <Container>
-                    <SectionTitle>Your Lands</SectionTitle>
-                    <SectionDescription>
-                        Stake your Lands and Join MetaCraft server at 18.219.218.172 to earn $BUILDs! 
-                        
-                        Once $BUILD is claimed, you'll be able to use these utility
-                        tokens for upcoming features, and other future projects.
-                    </SectionDescription>
-                    <DisplayNft/>
+          <Mint />
+        </Container>
+      </Bg>
 
-                    <Hr/>
-                    <SectionTitle>Your Unclaimed $BUILD</SectionTitle>
-                    <SectionDescription>
-                        Show $BUILD you have earned!
-                    </SectionDescription>
-                    <BuildToken/>
-                </Container>
-            </Section>
-        </>
-    )
-        ;
+      <Section>
+        <Container>
+          <SectionTitle>Your Lands</SectionTitle>
+          <SectionDescription>
+            Stake your Lands and Join MetaCraft server at 18.219.218.172 to earn
+            $BUILDs!
+          </SectionDescription>
+          <DisplayNft />
+
+          <Hr />
+          <SectionTitle>Your Unclaimed $BUILD</SectionTitle>
+          <SectionDescription>Show $BUILD you have earned!</SectionDescription>
+          <BuildToken />
+        </Container>
+      </Section>
+    </>
+  );
 };
 
 export default Dashboard;
