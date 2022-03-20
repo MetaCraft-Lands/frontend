@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  Collection,
-  Image,
-  NFT,
-  SelectSkin,
-  NFTName,
-  Stake,
-  NftTraits,
-  Frame,
-  Trait,
-} from "./styles";
+import { useState } from "react";
+import { Collection, Image, NFT, Frame } from "./styles";
 //@ts-ignore
 import Parse from "parse/dist/parse.min.js";
 import { nftContract } from "../../libs/contracts";
-import { connectWallet, getWalletAddr } from "../../libs/wallet";
+import { getWalletAddr } from "../../libs/wallet";
 import { BigNumber } from "ethers";
 import UploadMetadataButton from "../UploadMetadataButton/UploadMetadataButton";
 import LandSeed from "../LandSeed";
