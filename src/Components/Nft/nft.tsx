@@ -13,7 +13,7 @@ import {
 //@ts-ignore
 import Parse from "parse/dist/parse.min.js";
 import { nftContract } from "../../libs/contracts";
-import { walletAddr } from "../../libs/wallet";
+import { connectWallet } from "../../libs/wallet";
 import { BigNumber } from "ethers";
 import UploadMetadataButton from "../UploadMetadataButton/UploadMetadataButton";
 import LandSeed from "../LandSeed";
@@ -81,7 +81,7 @@ const getNftJsx = (land: Land): JSX.Element => {
   );
 };
 
-const landComponents = (await getNfts(walletAddr)).map(getNftJsx);
+const landComponents = (await getNfts(await connectWallet())).map(getNftJsx);
 
 const DisplayNft = () => {
   const [nfts, setNfts] = useState<JSX.Element[]>(landComponents);

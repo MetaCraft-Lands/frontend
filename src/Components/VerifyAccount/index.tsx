@@ -2,7 +2,7 @@ import { useState } from "react";
 //@ts-ignore
 import Parse from "parse/dist/parse.min.js";
 import { Button } from "../Mint/styles";
-import { walletAddr } from "../../libs/wallet";
+import { getWalletAddr, connectWallet } from "../../libs/wallet";
 
 Parse.initialize(
   process.env.REACT_APP_APPLICATION_ID,
@@ -27,6 +27,15 @@ const _readVerifyStatusFromDB = async (uuid: string): Promise<boolean> => {
   return users.length > 0 && users[0].IsVerified;
 };
 
+const _writeVerifyStatusToDB = async (user: User, isVerified: boolean) => {
+  const query = new Parse.Object("VerifiedUser");
+  query.set("Uuid", user.uuid);
+  query.set("Account", user.account);
+  query.set("Username", user.username);
+  query.set("IsVerified", isVerified);
+  await query.save();
+};
+
 const _walletSign = async (account: string) => {};
 
 const verify = async (user: User): Promise<boolean> => {
@@ -41,7 +50,7 @@ const verify = async (user: User): Promise<boolean> => {
   return true;
 };
 
-const parseUrlParams = (): User | null => {
+const parseUrlParams = async (): Promise<User | null> => {
   let url = window.location.search;
   let urlParams = new URLSearchParams(url);
 
@@ -52,15 +61,19 @@ const parseUrlParams = (): User | null => {
 
   let uuid = urlParams.get("uuid") || "";
   let username = urlParams.get("username") || "";
-  return uuid ? { account: walletAddr, uuid: uuid, username: username } : null;
+  return uuid
+    ? { account: await connectWallet(), uuid: uuid, username: username }
+    : null;
 };
 
 const VerifyAccount = () => {
   const [isVerified, setIsVerified] = useState(false);
-  const user: User | null = parseUrlParams();
+  const [user, setUser] = useState<User | null>(null);
 
-  const verifyHandler = () => {
+  const verifyHandler = async () => {
+    const user: User | null = await parseUrlParams();
     if (user) {
+      setUser(user);
       verify(user).then((verified) => {
         setIsVerified(verified);
       });
