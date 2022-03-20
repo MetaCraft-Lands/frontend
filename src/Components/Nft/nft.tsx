@@ -13,10 +13,13 @@ import {
 //@ts-ignore
 import Parse from "parse/dist/parse.min.js";
 import { nftContract } from "../../libs/contracts";
-import { connectWallet } from "../../libs/wallet";
+import { connectWallet, getWalletAddr } from "../../libs/wallet";
 import { BigNumber } from "ethers";
 import UploadMetadataButton from "../UploadMetadataButton/UploadMetadataButton";
 import LandSeed from "../LandSeed";
+
+declare var window: any;
+const { ethereum } = window;
 
 Parse.initialize(
   process.env.REACT_APP_APPLICATION_ID,
@@ -81,10 +84,24 @@ const getNftJsx = (land: Land): JSX.Element => {
   );
 };
 
-const landComponents = (await getNfts(await connectWallet())).map(getNftJsx);
+const loadNft = async (account: string, setFn: (x: JSX.Element[]) => void) => {
+  const nfts = await getNfts(account);
+  setFn(nfts.map(getNftJsx));
+};
 
 const DisplayNft = () => {
-  const [nfts, setNfts] = useState<JSX.Element[]>(landComponents);
+  const [nfts, setNfts] = useState<JSX.Element[]>([]);
+  getWalletAddr().then(async (account) => {
+    if (account) {
+      await loadNft(account, setNfts);
+    }
+  });
+
+  // Listen to account change and reload nfts.
+  ethereum.on("accountsChanged", async () => {
+    const account = await getWalletAddr();
+    await loadNft(account, setNfts);
+  });
 
   return (
     <>
