@@ -21,7 +21,7 @@ const _readVerifyStatusFromDB = async (uuid: string): Promise<boolean> => {
   console.log(process.env);
   const query = new Parse.Query("VerifiedUser");
   // use the equalTo filter to look for user which the name is John. this filter can be used in any data type
-  query.equalTo("Uuid", uuid);
+  query.equalTo("uuid", uuid);
   // run the query
   const users = await query.findAll();
   console.log(users);
@@ -30,10 +30,10 @@ const _readVerifyStatusFromDB = async (uuid: string): Promise<boolean> => {
 
 const _writeVerifyStatusToDB = async (user: User, isVerified: boolean) => {
   const query = new Parse.Object("VerifiedUser");
-  query.set("Uuid", user.uuid);
-  query.set("Account", user.account);
-  query.set("Username", user.username);
-  query.set("IsVerified", isVerified);
+  query.set("uuid", user.uuid);
+  query.set("account", user.account);
+  query.set("username", user.username);
+  query.set("isVerified", isVerified);
   await query.save();
 };
 
