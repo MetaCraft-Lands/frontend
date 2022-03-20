@@ -105,6 +105,7 @@ const DisplayNft = () => {
 
   getWalletAddr().then(async (account) => {
     if (account) {
+      // Load nfts if the current nfts is out of sync with the chain.
       await loadNft(account, nfts, setNfts);
     }
   });
