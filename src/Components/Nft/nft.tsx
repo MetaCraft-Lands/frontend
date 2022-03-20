@@ -74,34 +74,51 @@ const getNftJsx = (land: Land): JSX.Element => {
   );
 };
 
-const loadNft = async (account: string, setFn: (x: JSX.Element[]) => void) => {
-  const nfts = await getNfts(account);
-  setFn(nfts.map(getNftJsx));
+// Compare 2 lands list.
+const landsEq = (x: Land[], y: Land[]) => {
+  if (x.length != y.length) {
+    return false;
+  }
+
+  for (let i = 0; i < x.length; i++) {
+    if (!x[i].id.eq(y[i].id)) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
-// Global variable that won't get reloaded when componenet reload.
-window.$initNftLoaded = false;
+const loadNft = async (
+  account: string,
+  nfts: Land[],
+  setFn: (x: Land[]) => void
+) => {
+  const newNfts = await getNfts(account);
+  if (!landsEq(newNfts, nfts)) {
+    setFn(newNfts);
+  }
+};
 
 const DisplayNft = () => {
-  const [nfts, setNfts] = useState<JSX.Element[]>([]);
+  const [nfts, setNfts] = useState<Land[]>([]);
 
   getWalletAddr().then(async (account) => {
-    if (account && !window.$initNftLoaded) {
-      window.$initNftLoaded = true;
-      await loadNft(account, setNfts);
+    if (account) {
+      await loadNft(account, nfts, setNfts);
     }
   });
 
   // Listen to account change and reload nfts.
   ethereum.on("accountsChanged", async () => {
     const newAccount = await getWalletAddr();
-    await loadNft(newAccount, setNfts);
+    await loadNft(newAccount, nfts, setNfts);
   });
 
   return (
     <>
       <h1> Unstaked Lands </h1>
-      <Collection>{nfts}</Collection>
+      <Collection>{nfts.map(getNftJsx)}</Collection>
       <h1> Staked Lands </h1>
       <Collection></Collection>
     </>
