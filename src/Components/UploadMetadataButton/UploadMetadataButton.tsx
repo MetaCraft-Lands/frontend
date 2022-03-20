@@ -24,9 +24,9 @@ const UploadMetadataButton = () => {
         onChange={showSuccess}
       />
       <Button id="fileSelect" onClick={buttonClick}>
-        Upload world
+        Update
       </Button>
-      {success && <h1>NFT metadata updated!</h1>}
+      {success && alert("NFT metadata updated!")}
     </div>
   );
 };

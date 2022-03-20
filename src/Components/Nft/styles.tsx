@@ -18,7 +18,7 @@ export const Frame = styled.div`
   font-size: 1.8em;
   /* margin: 2em; */
   padding: 0.5em 1em;
-  padding-bottom: 2em;
+  padding-bottom: 4em;
   border: 2px solid green;
   border-radius: 5px;
 `;

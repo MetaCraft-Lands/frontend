@@ -16,6 +16,7 @@ import { nftContract } from "../../libs/contracts";
 import { walletAddr } from "../../libs/wallet";
 import { BigNumber } from "ethers";
 import UploadMetadataButton from "../UploadMetadataButton/UploadMetadataButton";
+import LandSeed from "../LandSeed";
 
 Parse.initialize(
   process.env.REACT_APP_APPLICATION_ID,
@@ -50,11 +51,7 @@ const getNfts = async (account: string): Promise<Land[]> => {
     uris.map(async (uri) => {
       uri = uri.replace("cf-ipfs.com", IPFS_GATEWAY);
       console.log("Fetching " + uri);
-      const resp = await fetch(uri, {
-        headers: {
-          "content-type": "application/json;charset=UTF-8",
-        },
-      });
+      const resp = await fetch(uri);
       return await resp.json();
     })
   );
@@ -77,6 +74,7 @@ const getNftJsx = (land: Land): JSX.Element => {
       <Frame>
         <Image src={land.image} alt={"nft"} />
         Land #{land.id.toString()}
+        <LandSeed id={land.id} />
         <UploadMetadataButton />
       </Frame>
     </NFT>
