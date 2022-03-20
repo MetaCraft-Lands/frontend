@@ -25,21 +25,27 @@ type Land = {
   image: string;
 };
 
+// Get info of all nfts account own.
 const getNfts = async (account: string): Promise<Land[]> => {
   console.log("fetching all nfts from chain...");
+  // Get how many nfts you own.
   let numNft: number = await nftContract.balanceOf(account);
 
+  // Get all token ids you own.
   let calls: any = [];
   for (let i = 0; i < numNft; i++) {
     calls.push(nftContract.tokenOfOwnerByIndex(account, i));
   }
   let tokenIds: BigNumber[] = await Promise.all(calls);
 
+  // Get tokenURI for each token.
   let uris = await Promise.all(
     tokenIds.map(async (id) => {
       return nftContract.tokenURI(id);
     })
   );
+
+  // Get Metadata from ipfs for each token.
   let metas: any = await Promise.all(
     uris.map(async (uri) => {
       uri = uri.replace("cf-ipfs.com", IPFS_GATEWAY);
@@ -49,6 +55,7 @@ const getNfts = async (account: string): Promise<Land[]> => {
     })
   );
 
+  // Aggregate all info into a list of Lands.
   let lands: Land[] = [];
   for (let i in tokenIds) {
     lands.push({
@@ -89,6 +96,7 @@ const landsEq = (x: Land[], y: Land[]) => {
   return true;
 };
 
+// Load nfts of current wallet account on chain.
 const loadNft = async (
   account: string,
   nfts: Land[],
@@ -118,10 +126,7 @@ const DisplayNft = () => {
 
   return (
     <>
-      <h1> Unstaked Lands </h1>
       <Collection>{nfts.map(getNftJsx)}</Collection>
-      <h1> Staked Lands </h1>
-      <Collection></Collection>
     </>
   );
 };
