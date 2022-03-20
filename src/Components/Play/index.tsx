@@ -26,13 +26,13 @@ const Play = () => {
                     <World>
                         <WorldImage src={"/img/world1.jpeg"}/>
                         <WorldTitle>NFT Worlds Factions</WorldTitle>
-                        <WorldDescription>Earn $WRLD token daily by competing and being part of a top faction on the NFT Worlds Factions worlds!</WorldDescription>
+                        <WorldDescription>Earn $BUILD token daily by competing and being part of a top faction on the NFT Worlds Factions worlds!</WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world2.jpeg"}/>
                         <WorldTitle>The Mothership</WorldTitle>
-                        <WorldDescription>Earn $WRLD token by participating in a fast paced first-person shooter battle arena! The Gray Boys mothership is open for all to play!
+                        <WorldDescription>Earn $BUILD token by participating in a fast paced first-person shooter battle arena! The Gray Boys mothership is open for all to play!
                         </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
