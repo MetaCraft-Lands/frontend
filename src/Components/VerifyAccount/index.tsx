@@ -2,7 +2,8 @@ import { useState } from "react";
 //@ts-ignore
 import Parse from "parse/dist/parse.min.js";
 import { Button } from "../Mint/styles";
-import { getWalletAddr, connectWallet } from "../../libs/wallet";
+import { connectWallet, signMsg, verifySig } from "../../libs/wallet";
+import { Verify } from "./styles";
 
 Parse.initialize(
   process.env.REACT_APP_APPLICATION_ID,
@@ -36,18 +37,26 @@ const _writeVerifyStatusToDB = async (user: User, isVerified: boolean) => {
   await query.save();
 };
 
-const _walletSign = async (account: string) => {};
+const _walletSign = async (): Promise<boolean> => {
+  const uuid = require("uuid");
+  const msg = "nounce: " + uuid.v4();
+
+  const { sig, addr } = await signMsg(msg);
+  return await verifySig(msg, addr, sig);
+};
 
 const verify = async (user: User): Promise<boolean> => {
-  if (!(await _readVerifyStatusFromDB(user.uuid))) {
+  let verifyStatus = await _readVerifyStatusFromDB(user.uuid);
+  if (!verifyStatus) {
     try {
-      await _walletSign(user.account);
+      verifyStatus = await _walletSign();
+      await _writeVerifyStatusToDB(user, verifyStatus);
     } catch (err) {
       console.log(err);
       return false;
     }
   }
-  return true;
+  return verifyStatus;
 };
 
 const parseUrlParams = async (): Promise<User | null> => {
@@ -81,13 +90,13 @@ const VerifyAccount = () => {
   };
 
   return (
-    <>
+    <Verify>
       {isVerified ? (
-        `Successfully verified user ${user?.username}`
+        <h1> Successfully verified user ${user?.username} </h1>
       ) : (
         <Button onClick={verifyHandler}>Verify account</Button>
       )}
-    </>
+    </Verify>
   );
 };
 

@@ -1,3 +1,5 @@
+import { ethers } from "ethers";
+
 declare var window: any;
 const { ethereum } = window;
 
@@ -90,4 +92,28 @@ const connectWallet = async () => {
   }
 };
 
-export { getWalletAddr, switchChain, connectWallet };
+// Sign a message using wallet.
+const signMsg = async (msg: string) => {
+  if (!ethereum) {
+    throw new Error("Please install Metamask!");
+  }
+
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  const signer = provider.getSigner();
+  const sig = await signer.signMessage(msg);
+  const addr = await signer.getAddress();
+  return { sig, addr };
+};
+
+// Verify if the sig is msg signed by addr.
+const verifySig = async (msg: string, addr: string, sig: string) => {
+  try {
+    const signerAddr = await ethers.utils.verifyMessage(msg, sig);
+    return signerAddr === addr;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
+export { getWalletAddr, switchChain, connectWallet, signMsg, verifySig };
