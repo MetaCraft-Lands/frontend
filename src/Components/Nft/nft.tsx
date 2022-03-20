@@ -27,36 +27,36 @@ type Land = {
 
 const getNfts = async (account: string): Promise<Land[]> => {
   console.log("fetching all nfts from chain...");
-  // let numNft: number = await nftContract.balanceOf(account);
-  //
-  // let calls: any = [];
-  // for (let i = 0; i < numNft; i++) {
-  //   calls.push(nftContract.tokenOfOwnerByIndex(account, i));
-  // }
-  // let tokenIds: BigNumber[] = await Promise.all(calls);
-  //
-  // let uris = await Promise.all(
-  //   tokenIds.map(async (id) => {
-  //     return nftContract.tokenURI(id);
-  //   })
-  // );
-  // let metas: any = await Promise.all(
-  //   uris.map(async (uri) => {
-  //     uri = uri.replace("cf-ipfs.com", IPFS_GATEWAY);
-  //     console.log("Fetching " + uri);
-  //     const resp = await fetch(uri);
-  //     return await resp.json();
-  //   })
-  // );
+  let numNft: number = await nftContract.balanceOf(account);
+
+  let calls: any = [];
+  for (let i = 0; i < numNft; i++) {
+    calls.push(nftContract.tokenOfOwnerByIndex(account, i));
+  }
+  let tokenIds: BigNumber[] = await Promise.all(calls);
+
+  let uris = await Promise.all(
+    tokenIds.map(async (id) => {
+      return nftContract.tokenURI(id);
+    })
+  );
+  let metas: any = await Promise.all(
+    uris.map(async (uri) => {
+      uri = uri.replace("cf-ipfs.com", IPFS_GATEWAY);
+      console.log("Fetching " + uri);
+      const resp = await fetch(uri);
+      return await resp.json();
+    })
+  );
 
   let lands: Land[] = [];
-  // for (let i in tokenIds) {
-  //   lands.push({
-  //     id: tokenIds[i],
-  //     name: metas[i].name,
-  //     image: metas[i].image.replace("ipfs://", `https://${IPFS_GATEWAY}/ipfs/`),
-  //   });
-  // }
+  for (let i in tokenIds) {
+    lands.push({
+      id: tokenIds[i],
+      name: metas[i].name,
+      image: metas[i].image.replace("ipfs://", `https://${IPFS_GATEWAY}/ipfs/`),
+    });
+  }
 
   return lands;
 };
@@ -79,20 +79,23 @@ const loadNft = async (account: string, setFn: (x: JSX.Element[]) => void) => {
   setFn(nfts.map(getNftJsx));
 };
 
+// Global variable that won't get reloaded when componenet reload.
+window.$initNftLoaded = false;
+
 const DisplayNft = () => {
   const [nfts, setNfts] = useState<JSX.Element[]>([]);
 
-  // getWalletAddr().then(async (account) => {
-  //   if (account && !loaded) {
-  //     // setInitLoaded(true);
-  //     await loadNft(account, setNfts);
-  //   }
-  // });
+  getWalletAddr().then(async (account) => {
+    if (account && !window.$initNftLoaded) {
+      window.$initNftLoaded = true;
+      await loadNft(account, setNfts);
+    }
+  });
 
   // Listen to account change and reload nfts.
   ethereum.on("accountsChanged", async () => {
-    const account = await getWalletAddr();
-    await loadNft(account, setNfts);
+    const newAccount = await getWalletAddr();
+    await loadNft(newAccount, setNfts);
   });
 
   return (
