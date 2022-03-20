@@ -27,7 +27,7 @@ const GetStarted = () => {
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        Mint your NFT today to gain access to a P2E Minecraft world and start generating $BLOCK while playing.
+                        Mint your NFT today to gain access to a P2E Minecraft world and start generating $LAND while playing.
                     </ActionDescription>
                     <ActionButton href={nftpage}>Mint NOW</ActionButton>
                     </ActionBox>
@@ -65,7 +65,7 @@ const GetStarted = () => {
                     <ActionDescription>
                         Trade your NFTs on marketplace or start by renting one. Sure you will be overloaded with amazingggg stuff.
                     </ActionDescription>
-                    <ActionButton href={marketplace}>NEAR Marketplace</ActionButton>
+                    <ActionButton href={marketplace}>Opensea Marketplace</ActionButton>
                     </ActionBox>
                 </SubSection>
 
