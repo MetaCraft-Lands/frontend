@@ -9,10 +9,8 @@ const LandSeed = (props: any) => {
     if (seed === 0) {
       nftContract.getSeed(props.id).then((seed) => {
         setSeed(seed);
+        alert(`Seed of land ${props.id} is ${seed}`);
       });
-    }
-    if (seed != 0) {
-      alert(`Seed of land ${props.id} is ${seed}`);
     }
   };
 
