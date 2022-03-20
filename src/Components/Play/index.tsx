@@ -25,36 +25,50 @@ const Play = () => {
                 <Collection>
                     <World>
                         <WorldImage src={"/img/world1.jpeg"}/>
-                        <WorldTitle>NFT Worlds Factions</WorldTitle>
-                        <WorldDescription>Earn $BUILD token daily by competing and being part of a top faction on the NFT Worlds Factions worlds!</WorldDescription>
+                        <WorldTitle>
+                            Glass House
+                        </WorldTitle>
+                        <WorldDescription>
+                            Earn $BUILD token daily by competing and being part of a top faction on the NFT Worlds Factions worlds!
+                        </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world2.jpeg"}/>
-                        <WorldTitle>The Mothership</WorldTitle>
-                        <WorldDescription>Earn $BUILD token by participating in a fast paced first-person shooter battle arena! The Gray Boys mothership is open for all to play!
+                        <WorldTitle>Tomorrowland</WorldTitle>
+                        <WorldDescription>
+                            The happiest place in the world! Check out everything you love about Disney World. Meet your old and new friends here!
                         </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world3.jpeg"}/>
-                        <WorldTitle>Bad Baby Dinos
+                        <WorldTitle>
+                            Among Us
                         </WorldTitle>
-                        <WorldDescription>Welcome to DinoWORLD! Filled with multiple custom games and experiences with play to earn mechanics, </WorldDescription>
+                        <WorldDescription>
+                            Most popular social game on MetaCraft! If you can catch the imposter...
+                        </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                     <World>
-                        <WorldImage src={"/img/world3.jpeg"}/>
-                        <WorldTitle>Bad Baby Dinos
+                        <WorldImage src={"/img/world4.jpeg"}/>
+                        <WorldTitle>
+                            Celebrate Today
                         </WorldTitle>
-                        <WorldDescription>Welcome to DinoWORLD! Filled with multiple custom games and experiences with play to earn mechanics, </WorldDescription>
+                        <WorldDescription>
+                            Celebrate the Lunar New Year by playing mini games in Minecraft!
+                        </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                     <World>
-                        <WorldImage src={"/img/world3.jpeg"}/>
-                        <WorldTitle>Bad Baby Dinos
+                        <WorldImage src={"/img/world5.jpeg"}/>
+                        <WorldTitle>
+                            EDC MetaCraft
                         </WorldTitle>
-                        <WorldDescription>Welcome to DinoWORLD! Filled with multiple custom games and experiences with play to earn mechanics, </WorldDescription>
+                        <WorldDescription>
+                            Get ready to rock in the metaverse! What's more? Register your favorite song today and grab a drink in-game!
+                        </WorldDescription>
                         <PlayNow>Play Now</PlayNow>
                     </World>
                 </Collection>

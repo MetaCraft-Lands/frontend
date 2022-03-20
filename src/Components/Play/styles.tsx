@@ -73,5 +73,5 @@ export const WorldTitle = styled.h1`
 export const WorldDescription = styled.p`
   color: whitesmoke;
   font-family: ntailu,serif;
-}
+  height: 63px;
 `

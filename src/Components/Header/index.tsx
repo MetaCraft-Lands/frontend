@@ -24,11 +24,7 @@ const Header = () => {
               <Span>MY METACRAFT</Span>
             </Link>
           </NavLink>
-          <NavLink>
-            <Link to="/play">
-              <Span>PLAY</Span>
-            </Link>
-          </NavLink>
+
           <NavLink>
             <Link to="/whitepaper">
               <Span>WHITEPAPER</Span>
