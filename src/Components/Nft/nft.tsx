@@ -81,11 +81,13 @@ const loadNft = async (account: string, setFn: (x: JSX.Element[]) => void) => {
 
 const DisplayNft = () => {
   const [nfts, setNfts] = useState<JSX.Element[]>([]);
-  getWalletAddr().then(async (account) => {
-    if (account) {
-      await loadNft(account, setNfts);
-    }
-  });
+
+  // getWalletAddr().then(async (account) => {
+  //   if (account && !loaded) {
+  //     // setInitLoaded(true);
+  //     await loadNft(account, setNfts);
+  //   }
+  // });
 
   // Listen to account change and reload nfts.
   ethereum.on("accountsChanged", async () => {
