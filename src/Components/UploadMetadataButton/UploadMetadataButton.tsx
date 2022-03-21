@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../../styles/styles";
 import { nftContract } from "../../libs/contracts";
 import { BigNumber } from "ethers";
+import { readUpdatedIpfsMetadataHash } from "../../config/metadata";
 
 interface Nft {
   id: BigNumber; //uint256 nft token id.
@@ -23,7 +24,19 @@ const UploadMetadataButton = (props: Nft) => {
     }
   };
 
-  const showSuccess = () => {
+  const fileUploaded = async () => {
+    let hash: string = readUpdatedIpfsMetadataHash(props.id);
+    console.log("Updated hash: " + hash);
+    try {
+      console.log("Updating NFT... please wait");
+      let nftTxn = await nftContract.updateMetadataIPFSHash(props.id, hash);
+      await nftTxn.wait();
+      alert(
+        `NFT updated, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`
+      );
+    } catch (err) {
+      alert(err);
+    }
     setSuccess(true);
   };
 
@@ -33,7 +46,7 @@ const UploadMetadataButton = (props: Nft) => {
         type="file"
         id="fileElem"
         style={{ display: "none" }}
-        onChange={showSuccess}
+        onChange={fileUploaded}
       />
       <Button id="fileSelect" onClick={buttonClick}>
         Update

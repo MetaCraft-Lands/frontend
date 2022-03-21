@@ -1,3 +1,6 @@
+import { BigNumber } from '@ethersproject/bignumber';
+import getHash from './config';
+
 const metadata = [
     {
         "_tokenId": 1,
@@ -21,3 +24,7 @@ export const randomMeta = () => {
     let meta = metadata[idx];
     return meta;
 }
+
+export const readUpdatedIpfsMetadataHash = (id: BigNumber): string => {
+  return getHash(id.toNumber());
+};
