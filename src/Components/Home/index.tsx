@@ -23,7 +23,7 @@ const Home = () => {
                     <Block>
                         <Heading>
                             <Title> MetaCraft </Title>
-                            <h1> Get NFTs and Craft your World</h1>
+                            <h1> Get LANDs, NFTs & Craft Your World</h1>
                         </Heading>
                     </Block>
                 </Para>

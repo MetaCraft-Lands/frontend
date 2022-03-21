@@ -50,7 +50,7 @@ const Play = () => {
                     ip={ip}
                 />
                 <SectionTitle>
-                    Playable Worlds
+                    Playable Lands
                 </SectionTitle>
 
                 <SectionDescription>
@@ -66,7 +66,7 @@ const Play = () => {
                         <WorldDescription>
                             Earn $BUILD token by playing and building on MetaCraft Land
                         </WorldDescription>
-                        <PlayNow onClick={() => setShow( "127.0.0.1")}>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "18.219.218.172")}>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world2.jpeg"}/>
@@ -75,7 +75,8 @@ const Play = () => {
                             The happiest place in the world! Check out everything you love about Disney World. Meet your
                             old and new friends here!
                         </WorldDescription>
-                        <PlayNow onClick={() => setShow( "18.219.218.172")}>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "127.0.0.1")}>Play Now</PlayNow>
+
 
                     </World>
                     <World>
