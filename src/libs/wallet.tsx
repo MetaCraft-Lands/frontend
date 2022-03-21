@@ -16,12 +16,12 @@ const getWalletAddr = async (): Promise<string> => {
   const accounts = await ethereum.request({ method: "eth_accounts" });
   if (accounts.length > 0) {
     const chainId = await ethereum.request({ method: "eth_chainId" });
-    console.log("chain id is " + chainId);
+    // console.log("chain id is " + chainId);
     if (chainId != RINKEBY_CHAIN_ID_HEX) {
-      console.log("Wrong network");
+      console.error("Wrong network");
       return "";
     }
-    console.log("Found an account! Address: ", accounts[0]);
+    // console.log("Found an account! Address: ", accounts[0]);
     return accounts[0];
   } else {
     console.log("No authorized account found");
@@ -77,7 +77,7 @@ const connectWallet = async () => {
 
   try {
     const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-    console.log("Found an account! Address: ", accounts[0]);
+    // console.log("Found an account! Address: ", accounts[0]);
 
     const chainId = await ethereum.request({ method: "eth_chainId" });
     if (chainId != RINKEBY_CHAIN_ID_HEX) {
