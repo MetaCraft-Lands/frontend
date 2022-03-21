@@ -13,7 +13,7 @@ import Container from "../Container";
 
 const GetStarted = () => {
     const nftpage = "/nft"
-    const marketplace = "https://paras.id/"
+    const marketplace = "https://testnets.opensea.io/collection/metacraft-h3ifpy6lki"
     return (
         <Section>
             <Container>
@@ -27,7 +27,7 @@ const GetStarted = () => {
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        Mint your NFT today to gain access to a P2E Minecraft world and start generating $LAND while playing.
+                        Mint a land and start to create anything you can imagine. What's more? You own them all!
                     </ActionDescription>
                     <ActionButton href={nftpage}>Mint NOW</ActionButton>
                     </ActionBox>
@@ -35,15 +35,29 @@ const GetStarted = () => {
 
                 <SubSection>
                     <Action>
-                        Unlock New Possibilities
+                        Explore
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        Stake to access unique mechanics such as renting, Plot claiming, and $BUILD generation.
+                        Explore LANDs owned by users to experience incredible Minecraft metaverse
                     </ActionDescription>
-                    <ActionButton href={nftpage}>Stake NOW</ActionButton>
+                    <ActionButton href={nftpage}>Explore NOW</ActionButton>
                     </ActionBox>
                 </SubSection>
+
+
+                <SubSection>
+                    <Action>
+                        Create
+                    </Action>
+                    <ActionBox>
+                        <ActionDescription>
+                            Create buildings, artworks, games and even more using the simple tool we provided. Everyone can create
+                        </ActionDescription>
+                        <ActionButton href={nftpage}>Build Now</ActionButton>
+                    </ActionBox>
+                </SubSection>
+
 
                 <SubSection>
                     <Action>
@@ -51,7 +65,7 @@ const GetStarted = () => {
                     </Action>
                     <ActionBox>
                     <ActionDescription>
-                        $BUILD tokens are ERC20 tokens that are generated with in-game activity in Minecraft and staked NFTs. $BUILD can be used for for purchasing plots and other in-game items. More to come...
+                        $BUILD tokens are ERC20 tokens that are generated with in-game activity in Minecraft and staked NFTs. $BUILD can be used for building your LANDs and unlock in-game items. More to come...
                     </ActionDescription>
                     <ActionButton href={nftpage}>Claim $BUILD NOW</ActionButton>
                     </ActionBox>
@@ -59,7 +73,7 @@ const GetStarted = () => {
 
                 <SubSection>
                     <Action>
-                        Trade & Rent
+                        Know More
                     </Action>
                     <ActionBox>
                     <ActionDescription>
@@ -71,11 +85,11 @@ const GetStarted = () => {
 
                 <SubSection>
                     <Action>
-                        Even More
+                        Know More
                     </Action>
                     <ActionBox>
                         <ActionDescription>
-                            We creates a virtual space where Minecraft playing and blockchain can converge beautifully. Check out for more.
+                            Check out our social medias and whitepaper
                         </ActionDescription>
                         <ActionButton>Learn More</ActionButton>
                     </ActionBox>
