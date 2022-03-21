@@ -75,3 +75,20 @@ export const WorldDescription = styled.p`
   font-family: ntailu,serif;
   height: 63px;
 `
+
+export const Ip = styled.p`
+  font-size: 1.2rem;
+  color: whitesmoke;
+  background: black;
+  font-family: "ntailu",serif;
+`
+
+export const Close = styled.button`
+  padding: 0;
+  border: none;
+  color: white;
+  background-color: #1b7af5;
+  font-size: 1rem;
+  width: 80px;
+  border-radius: 5px;
+`

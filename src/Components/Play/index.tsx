@@ -1,5 +1,6 @@
 import {
-    Collection,
+    Close,
+    Collection, Ip,
 
     PlayNow,
     Section,
@@ -8,18 +9,52 @@ import {
 } from "./styles";
 
 import Container from "../Container";
+import {useState} from "react";
+import {Button, Modal} from "react-bootstrap";
+
+function MyVerticallyCenteredModal(props) {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Body>
+                <Ip>
+                    Play at: {props.ip}
+                </Ip>
+            </Modal.Body>
+            <Modal.Footer>
+                <Close onClick={props.onHide}>Close</Close>
+            </Modal.Footer>
+        </Modal>
+    );
+}
 
 const Play = () => {
+    const [modalShow, setModalShow] = useState(false);
+    const [ip, setIp] = useState(false);
+
+    function setShow(ip)  {
+        setModalShow(true)
+        setIp(ip)
+    }
+
     return (
         <Section>
             <Container>
-
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    ip={ip}
+                />
                 <SectionTitle>
                     Playable Worlds
                 </SectionTitle>
 
                 <SectionDescription>
-                  Check out these live Metacraft worlds. These worlds are still in early beta.
+                    Check out these live Metacraft worlds. These worlds are still in early beta.
                 </SectionDescription>
 
                 <Collection>
@@ -29,17 +64,19 @@ const Play = () => {
                             Glass House
                         </WorldTitle>
                         <WorldDescription>
-                            Earn $BUILD token daily by competing and being part of a top faction on the NFT Worlds Factions worlds!
+                            Earn $BUILD token by playing and building on MetaCraft Land
                         </WorldDescription>
-                        <PlayNow>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "127.0.0.1")}>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world2.jpeg"}/>
                         <WorldTitle>Tomorrowland</WorldTitle>
                         <WorldDescription>
-                            The happiest place in the world! Check out everything you love about Disney World. Meet your old and new friends here!
+                            The happiest place in the world! Check out everything you love about Disney World. Meet your
+                            old and new friends here!
                         </WorldDescription>
-                        <PlayNow>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "18.219.218.172")}>Play Now</PlayNow>
+
                     </World>
                     <World>
                         <WorldImage src={"/img/world3.jpeg"}/>
@@ -49,7 +86,8 @@ const Play = () => {
                         <WorldDescription>
                             Most popular social game on MetaCraft! If you can catch the imposter...
                         </WorldDescription>
-                        <PlayNow>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "coming soon...")}>Play Now</PlayNow>
+
                     </World>
                     <World>
                         <WorldImage src={"/img/world4.jpeg"}/>
@@ -59,7 +97,7 @@ const Play = () => {
                         <WorldDescription>
                             Celebrate the Lunar New Year by playing mini games in Minecraft!
                         </WorldDescription>
-                        <PlayNow>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "coming soon...")}>Play Now</PlayNow>
                     </World>
                     <World>
                         <WorldImage src={"/img/world5.jpeg"}/>
@@ -67,9 +105,10 @@ const Play = () => {
                             EDC MetaCraft
                         </WorldTitle>
                         <WorldDescription>
-                            Get ready to rock in the metaverse! What's more? Register your favorite song today and grab a drink in-game!
+                            Get ready to rock in the metaverse! What's more? Register your favorite song today and grab
+                            a drink in-game!
                         </WorldDescription>
-                        <PlayNow>Play Now</PlayNow>
+                        <PlayNow onClick={() => setShow( "coming soon...")}>Play Now</PlayNow>
                     </World>
                 </Collection>
 

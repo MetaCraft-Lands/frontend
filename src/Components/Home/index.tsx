@@ -29,7 +29,7 @@ const Home = () => {
                 </Para>
 
             <Demo/>
-            <Play/>
+            {/*<Play/>*/}
             <GetStarted/>
         </>
     );
