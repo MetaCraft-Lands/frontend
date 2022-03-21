@@ -116,10 +116,10 @@ const BuildToken = () => {
 
     // 10**5 is the decimals for the token.
     await mint(Math.floor(amountToClaim * 10 ** DECIMAL));
-    await loadTokenBalance(tokenBalance, setTokenBalance);
 
     resetPlayTimeInDB(addr);
     setTokenToClaim(0);
+    await loadTokenBalance(tokenBalance, setTokenBalance);
   };
 
   return (
