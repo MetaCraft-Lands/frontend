@@ -75,7 +75,7 @@ const getNftJsx = (land: Land): JSX.Element => {
         <Image src={land.image} alt={"nft"} />
         Land #{land.id.toString()}
         <LandSeed id={land.id} />
-        <UploadMetadataButton />
+        <UploadMetadataButton id={land.id} />
       </Frame>
     </NFT>
   );
