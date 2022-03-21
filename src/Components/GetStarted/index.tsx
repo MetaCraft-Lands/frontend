@@ -74,16 +74,6 @@ const GetStarted = () => {
             <ActionButton href={marketplace}>Opensea Marketplace</ActionButton>
           </ActionBox>
         </SubSection>
-
-        <SubSection>
-          <Action>Know More</Action>
-          <ActionBox>
-            <ActionDescription>
-              Check out our social medias and whitepaper
-            </ActionDescription>
-            <ActionButton>Learn More</ActionButton>
-          </ActionBox>
-        </SubSection>
       </Container>
     </Section>
   );
