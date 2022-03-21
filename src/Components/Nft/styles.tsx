@@ -12,12 +12,12 @@ export const Frame = styled.div`
   width: 200px;
   height: 200px;
   //border: 3px solid white;
-  margin: 0 auto 1.5rem;
-  position: relative;
+  /* margin: 0 auto 1.5rem; */
+  position: center;
   align-items: center;
   font-size: 1.8em;
   /* margin: 2em; */
-  padding: 0.5em 1em;
+  padding: 1em;
   padding-bottom: 4em;
   border: 2px solid green;
   border-radius: 5px;

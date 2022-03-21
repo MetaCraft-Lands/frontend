@@ -24,8 +24,7 @@ const Dashboard = () => {
         <Container>
           <SectionTitle>Your Lands</SectionTitle>
           <SectionDescription>
-            Stake your Lands and Join MetaCraft server at 18.219.218.172 to earn
-            $BUILDs!
+            Start build your MetaCraft Land!
           </SectionDescription>
           <DisplayNft />
 
