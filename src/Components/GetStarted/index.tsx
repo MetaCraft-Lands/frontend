@@ -13,7 +13,7 @@ import Container from "../Container";
 const GetStarted = () => {
   const nftpage = "/nft";
   const marketplace =
-    "https://testnets.opensea.io/collection/metacraft-h3ifpy6lki";
+    "https://testnets.opensea.io/collection/metacraft-jthkca9ee0";
   return (
     <Section>
       <Container>
