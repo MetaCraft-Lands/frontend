@@ -34,7 +34,10 @@ export const NFT = styled.div`
   //border: 2px solid #282c34;
   width: 175px;
   //height: 300px;
-  margin: 1rem;
+  /* margin: 4rem; */
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 3rem;
 `;
 
 export const NftTraits = styled.div`
